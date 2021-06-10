@@ -1,0 +1,6 @@
+data_path: <PATH TO DATASET> #'./data' #PATH TO IMAGES FOLDER train, valid, test folders 
+names: 
+  -
+  -
+  -
+  -
