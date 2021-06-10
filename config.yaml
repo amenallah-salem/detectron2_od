@@ -1,6 +1,6 @@
-data_path: <PATH TO DATASET> #'./data' #PATH TO IMAGES FOLDER train, valid, test folders 
-names: 
-  -
-  -
-  -
-  -
+data_path: ./data
+names: ['bicycle', 'car', 'person', 'airplane']
+model_name: COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml
+model_ckpt: COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml
+max_iterations: 100
+batch_size: 16

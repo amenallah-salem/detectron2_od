@@ -3,7 +3,7 @@ import glob
 import pandas as pd
 import xml.etree.ElementTree as ET
 import pandas as pd 
-from config import red_config
+from config_utils import read_config
 
 
 def xml_to_csv(path):
@@ -29,37 +29,18 @@ def xml_to_csv(path):
 
 def main():
     for folder in ['train', 'valid']:
-        image_path = os.path.join(os.getcwd(), ('data/' + folder))
+        image_path = data['data_path'] +'/' + folder
         xml_df = xml_to_csv(image_path)
-        xml_df.to_csv(('data/'+folder+'_labels.csv'), index=None)
-    print('Successfully converted xml to csv.')
+        xml_df.to_csv((data['data_path'] + "/" + folder + '_labels.csv'), index=None)
+
 
 if __name__=='__main__':
     data= read_config("./config.yaml")
+    print("reading config.yaml file: \n", data)
+
     main()
-    local_dir = os.getcwd()
-    list_files = []
-    for files in os.listdir(local_dir):
-
-        list_files.append(files)
-    if 'train_utils' in list_files:
-        print('Preparing train utils..\ file train_utils exist')
-        pass
-    else:
-        print("directory train_utils doen't exist... creating ./train_utils folder in progress")
-        os.mkdir('train_utils')
-    #############
-    if 'history' in list_files:
-        print('history exist')
-        pass
-    else:
-        print("directory history doen't exist... creating history folder in progress")
-        os.mkdir('history')
-
-    ################
-
-
+    print('Successfully converted xml to csv.')
     
-    train_labels = pd.read_csv('./data/train_labels.csv')
-    valid_labels = pd.read_csv('./data/valid_labels.csv')
+    train_labels = pd.read_csv(os.path.join(data['data_path'],'train_labels.csv'))
+    valid_labels = pd.read_csv(os.path.join(data['data_path'],'valid_labels.csv'))
     print('head of train labels.csv: {}\nhead of valid_labels.csv: {}'.format(train_labels, valid_labels))
